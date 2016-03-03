@@ -22,4 +22,6 @@ RUN apt-get update \
 		git \
 		libssl-dev \
 		php5-intl \
+		php5-gd \
+        php5-mysql \
 	&& rm -rf /var/lib/apt/lists/*
