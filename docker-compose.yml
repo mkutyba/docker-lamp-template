@@ -15,9 +15,11 @@ services:
       - db
     working_dir: /var/www/html
   db:
-    image: mysql:5.7
+    build: ./docker/mysql/.
+    image: my_mysql-5.7:20160303
     volumes:
-      - ./docker/mysql:/etc/mysql/conf.d
+      - ./docker/mysql/initial-data:/docker-entrypoint-initdb.d
+      - ./docker/mysql/data:/var/lib/mysql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
       MYSQL_DATABASE: 'phpapp'
