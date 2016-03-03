@@ -1,6 +1,6 @@
 FROM php:5.6-apache
 
-ADD docker/php/php.ini /usr/local/etc/php/php.ini
+ADD ./php/php.ini /usr/local/etc/php/php.ini
 
 # apache mod rewrite
 RUN a2enmod rewrite
