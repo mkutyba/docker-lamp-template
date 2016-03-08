@@ -1,27 +1,29 @@
 FROM php:5.6-apache
 
-ADD ./php/php.ini /usr/local/etc/php/php.ini
-
 # apache mod rewrite
 RUN a2enmod rewrite
 
 # xdebug
 RUN pecl install xdebug \
-	&& echo zend_extension=xdebug.so > /usr/local/etc/php/conf.d/xdebug.ini
+	&& docker-php-ext-enable xdebug
 
 # composer
 RUN curl -sS https://getcomposer.org/installer | php \
 	&& mv composer.phar /usr/bin/composer
 
-# additional packages
-RUN pecl install zip \
-	&& echo extension=zip.so > /usr/local/etc/php/conf.d/zip.ini
+ADD ./php/php.ini /usr/local/etc/php/conf.d/php-additional.ini
 
+# additional packages
 RUN apt-get update \
 	&& apt-get install -y \
 		git \
+		php5-mysql \
 		libssl-dev \
-		php5-intl \
-		php5-gd \
-        php5-mysql \
+		libfreetype6-dev \
+		libjpeg62-turbo-dev \
+        libmcrypt-dev \
+        libpng12-dev \
+    && docker-php-ext-install -j$(nproc) mcrypt pdo_mysql zip \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd \
 	&& rm -rf /var/lib/apt/lists/*
