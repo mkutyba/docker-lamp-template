@@ -1,7 +1,9 @@
 FROM php:5.6-apache
 
 # apache mod rewrite
-RUN a2enmod rewrite
+RUN a2enmod rewrite \
+    && a2enmod headers \
+    && a2enconf other-vhosts-access-log
 
 # xdebug
 RUN pecl install xdebug \
