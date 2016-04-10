@@ -13,7 +13,7 @@ RUN pecl install xdebug \
 RUN curl -sS https://getcomposer.org/installer | php \
 	&& mv composer.phar /usr/bin/composer
 
-ADD ./php/php.ini /usr/local/etc/php/conf.d/php-additional.ini
+COPY ./php/php.ini /usr/local/etc/php/conf.d/php-additional.ini
 
 # additional packages
 RUN apt-get update \
