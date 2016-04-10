@@ -23,3 +23,15 @@ services:
       MYSQL_DATABASE: 'phpapp'
     ports:
       - "3306:3306"
+  node:
+    build: ./docker/node/.
+    volumes:
+      - ./docker/node/d:/var/www/node
+    volumes_from:
+      - apache
+    links:
+      - apache
+    ports:
+      - "3001:3001"
+      - "8080:8080"
+    working_dir: /var/www/node
