@@ -1,7 +1,7 @@
 version: '2'
 services:
-  apache:
-    build: ./docker/apache/.
+  php:
+    build: ./docker/php/.
     volumes:
       - ./src:/var/www/html
       - ./apache-log:/var/log/apache2
@@ -20,7 +20,7 @@ services:
       - ./docker/mysql/data:/var/lib/mysql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-      MYSQL_DATABASE: 'phpapp'
+      MYSQL_DATABASE: 'db'
     ports:
       - "3306:3306"
   node:
@@ -28,9 +28,9 @@ services:
     volumes:
       - ./docker/node/d:/var/www/node
     volumes_from:
-      - apache
+      - php
     links:
-      - apache
+      - php
     ports:
       - "3001:3001"
       - "8080:8080"
