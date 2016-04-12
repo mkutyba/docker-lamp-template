@@ -1,7 +1,9 @@
 version: '2'
 services:
   php:
-    build: ./docker/php/.
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile-php
     volumes:
       - ./src:/var/www/html
       - ./apache-log:/var/log/apache2
@@ -14,7 +16,9 @@ services:
       - db
     working_dir: /var/www/html
   db:
-    build: ./docker/mysql/.
+    build:
+      context: ./docker/mysql
+      dockerfile: Dockerfile-mysql
     volumes:
       - ./docker/mysql/initial-data:/docker-entrypoint-initdb.d
       - ./docker/mysql/data:/var/lib/mysql
@@ -24,7 +28,9 @@ services:
     ports:
       - "3306:3306"
   node:
-    build: ./docker/node/.
+    build:
+      context: ./docker/node
+      dockerfile: Dockerfile-node
     volumes:
       - ./docker/node/d:/var/www/node
     volumes_from:
