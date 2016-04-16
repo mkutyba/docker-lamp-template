@@ -4,6 +4,7 @@ services:
     build:
       context: ./docker/php
       dockerfile: Dockerfile-php
+    image: local/php:5.6
     volumes:
       - ./src:/var/www/html
       - ./apache-log:/var/log/apache2
@@ -19,6 +20,7 @@ services:
     image: mysql:5.7
     volumes:
       - ./docker/mysql/initial-data:/docker-entrypoint-initdb.d
+      - ./docker/mysql/config:/etc/mysql/conf.d
       - ./docker/mysql/data:/var/lib/mysql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
@@ -29,8 +31,9 @@ services:
     build:
       context: ./docker/node
       dockerfile: Dockerfile-node
+    image: local/node:5-gulp
     volumes:
-      - ./docker/node/d:/var/www/node
+      - ./docker/node/data:/var/www/node
     volumes_from:
       - php
     links:
