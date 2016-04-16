@@ -1,5 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="docker xdebug" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" singleton="true" server_name="docker 192.168.99.100" session_id="storm">
-    <method />
-  </configuration>
-</component>
