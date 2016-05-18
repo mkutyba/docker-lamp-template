@@ -8,6 +8,7 @@ services:
     volumes:
       - ./src:/var/www/html
       - ./apache-log:/var/log/apache2
+      - ./docker/php/sites:/etc/apache2/sites-enabled
     ports:
       - "80:80"
       - "443:443"
