@@ -19,7 +19,7 @@ services:
       - mailcatcher
     working_dir: /var/www/html
   db:
-    image: mysql:5.7
+    image: percona:5.7
     volumes:
       - ./docker/mysql/initial-data:/docker-entrypoint-initdb.d
       - ./docker/mysql/config:/etc/mysql/conf.d
