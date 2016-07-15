@@ -47,7 +47,7 @@ gulp.task('js-min', function () {
 // BrowserSync
 gulp.task('browser-sync', function () {
     browserSync({
-        proxy: "apache",
+        proxy: "php",
         port: 8080
     });
 });
