@@ -16,6 +16,7 @@ services:
       APACHE_LOG_DIR: '/var/log/apache2'
     links:
       - db
+      - mailcatcher
     working_dir: /var/www/html
   db:
     image: mysql:5.7
@@ -48,3 +49,7 @@ services:
     command: ngrok http php:80
     ports:
       - "4040:4040"
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - "1080:1080"
