@@ -43,3 +43,8 @@ services:
       - "3001:3001"
       - "8080:8080"
     working_dir: /var/www/node
+  ngrok:
+    image: wernight/ngrok
+    command: ngrok http php:80
+    ports:
+      - "4040:4040"
