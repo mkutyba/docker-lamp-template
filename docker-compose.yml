@@ -6,12 +6,14 @@ services:
     volumes:
       - ./src/:/var/www/html/
       - ./log/apache/:/var/log/apache2/
-      - ./config/php/sites/:/etc/apache2/sites-enabled/
+      - ./config/php/sites-enabled/:/etc/apache2/sites-enabled/
     ports:
       - 80:80
       - 443:443
     environment:
       - APACHE_LOG_DIR=/var/log/apache2
+      - VIRTUAL_HOST=example.local
+      - VIRTUAL_HOST_DIRECTORY=/var/www/html
     links:
       - db
       - mailcatcher
