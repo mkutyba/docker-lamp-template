@@ -8,8 +8,8 @@ var gulp = require('gulp'),
 
 // SASS tasks
 var sass_paths = [
-    '../html/css/style-example1.scss',
-    '../html/css/style-example2.scss'
+    './css/style-example1.scss',
+    './css/style-example2.scss'
 ];
 
 gulp.task('sass', function () {
@@ -22,16 +22,16 @@ gulp.task('sass', function () {
             }).on('error', sass.logError)
         )
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('../html/css/'))
+        .pipe(gulp.dest('./css/'))
         .pipe(browserSync.reload({stream: true, match: '**/*.css'}));
 });
 
 // JS-MIN task - minify and merge JS files
 var js_paths = [
-    '../html/js/scripts-example1.js',
-    '../html/js/scripts-example2.js'
+    './js/scripts-example1.js',
+    './js/scripts-example2.js'
 ];
-var js_path_merged = '../html/js/';
+var js_path_merged = './js/';
 
 gulp.task('js-min', function () {
     return gulp
@@ -55,7 +55,7 @@ gulp.task('browser-sync', function () {
 // Watch task
 gulp.task('watch', function () {
     // Watch .scss files
-    gulp.watch('../html/css/**/*.scss', {
+    gulp.watch('./css/**/*.scss', {
         debounceDelay: 2000
     }, ['sass']);
 

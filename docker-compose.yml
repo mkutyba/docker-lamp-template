@@ -1,56 +1,50 @@
 version: '2'
 services:
   php:
-    build:
-      context: ./docker/php
-      dockerfile: Dockerfile-php
+    build: ./docker/php/
     image: local/php:5.6
     volumes:
-      - ./src:/var/www/html
-      - ./apache-log:/var/log/apache2
-      - ./docker/php/sites:/etc/apache2/sites-enabled
+      - ./src/:/var/www/html/
+      - ./log/apache/:/var/log/apache2/
+      - ./config/php/sites/:/etc/apache2/sites-enabled/
     ports:
-      - "80:80"
-      - "443:443"
+      - 80:80
+      - 443:443
     environment:
-      APACHE_LOG_DIR: '/var/log/apache2'
+      - APACHE_LOG_DIR=/var/log/apache2
     links:
       - db
       - mailcatcher
-    working_dir: /var/www/html
+    working_dir: /var/www/html/
   db:
     image: percona:5.7
     volumes:
-      - ./docker/mysql/initial-data:/docker-entrypoint-initdb.d
-      - ./docker/mysql/config:/etc/mysql/conf.d
-      - ./docker/mysql/data:/var/lib/mysql
+      - ./config/mysql/initial-data/:/docker-entrypoint-initdb.d/
+      - ./config/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./data/mysql/:/var/lib/mysql/
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-      MYSQL_DATABASE: 'db'
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=db
     ports:
-      - "3306:3306"
+      - 3306:3306
   node:
-    build:
-      context: ./docker/node
-      dockerfile: Dockerfile-node
+    build: ./docker/node/
     image: local/node:5-gulp
-    volumes:
-      - ./docker/node/data:/var/www/node
     volumes_from:
       - php
     links:
       - php
     ports:
-      - "3001:3001"
-      - "8080:8080"
-    working_dir: /var/www/node
+      - 3001:3001
+      - 8080:8080
+    working_dir: /var/www/html/
   ngrok:
     image: wernight/ngrok
     command: ngrok http php:80
     ports:
-      - "4040:4040"
+      - 4040:4040
   mailcatcher:
     image: schickling/mailcatcher
     ports:
-      - "1025:1025"
-      - "1080:1080"
+      - 1025:1025
+      - 1080:1080
