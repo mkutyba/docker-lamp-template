@@ -23,7 +23,7 @@ gulp.task('sass', function () {
         )
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('../html/css/'))
-        .pipe(browserSync.reload({stream: true}));
+        .pipe(browserSync.reload({stream: true, match: '**/*.css'}));
 });
 
 // JS-MIN task - minify and merge JS files
