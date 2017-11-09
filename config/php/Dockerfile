@@ -1,4 +1,4 @@
-FROM php:5.6-apache
+FROM php:7-apache
 
 # apache mod rewrite
 RUN a2enmod rewrite \
@@ -17,7 +17,6 @@ RUN curl -sS https://getcomposer.org/installer | php \
 RUN apt-get update \
     && apt-get install -y \
         git \
-        php5-mysql \
         libssl-dev \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
