@@ -28,7 +28,7 @@ crashlytics-build.properties
 fabric.properties
 
 /apache-log/
-/docker/mysql/data/
-/docker/node/data/node_modules/
+/data/mysql/
+/src/node_modules/
 /docs/
 /tmp/
