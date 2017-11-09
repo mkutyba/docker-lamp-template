@@ -1,7 +1,7 @@
 version: '2'
 services:
   php:
-    build: ./docker/php/
+    build: ./config/php/
     image: local/php:7
     volumes:
       - ./src/:/var/www/html/
@@ -30,7 +30,7 @@ services:
     ports:
       - 3306:3306
   node:
-    build: ./docker/node/
+    build: ./config/node/
     image: local/node:6-gulp
     volumes_from:
       - php
